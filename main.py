@@ -1,11 +1,22 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from enrichment import enrich_data, EnrichmentError
 import os
+import json
 import logging
+
+# Load configuration
+try:
+    with open("config.json", "r") as f:
+        config = json.load(f)
+    env = os.getenv("FLASK_ENV", "local").lower()
+    log_level = getattr(logging, config[env]["log_level"])
+except Exception as e:
+    print(f"Warning: Could not load config.json, using default settings: {str(e)}")
+    log_level = logging.INFO
 
 # Configure logging
 logging.basicConfig(
-    level=logging.INFO,
+    level=log_level,
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 

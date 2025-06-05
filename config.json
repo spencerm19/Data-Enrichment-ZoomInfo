@@ -1,12 +1,8 @@
 {
     "local": {
-        "zoominfo_secret_name": "zoominfo/credentials-prod",
-        "s3_output_prefix": "enriched",
         "log_level": "INFO"
     },
     "prod": {
-        "zoominfo_secret_name": "zoominfo/credentials-prod",
-        "s3_output_prefix": "enriched",
         "log_level": "WARNING"
     }
 } 

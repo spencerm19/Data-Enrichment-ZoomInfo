@@ -9,24 +9,18 @@ services:
         target: /app/config.json
         read_only: true
     ports:
-      - "8888:8000"
+      - "10.0.10.163:8888:8000"
     environment:
       - PYTHONPATH=/app
-      - ZOOMINFO_USERNAME=zoominfo@avetta.com
-      - ZOOMINFO_PASSWORD=Zinfopwd22!
       - ZOOMINFO_CLIENT_ID=460dd53b-7c55-4ebd-a3f2-fd51e1fb4cb7
       - ZOOMINFO_PRIVATE_KEY=-----BEGIN PRIVATE KEY-----\nMIIEwAIBADANBgkqhkiG9w0BAQEFAASCBKowggSmAgEAAoIBAQC6Co66oZIAkkwP\nYO8paajfRrrMGHLLFvFQYWW6L/w/8Q86fy97IXQc+EnQ987u5GZqiyXXSelJ0Ouc\nqJMxnF4lxfD0FrE7v943sVnAEIB8XotOe3ujIlww83GtRXgit4Y5067UiOQxWwdQ\nUNP1LKwZAytsLpnu+dPdXP/GFWF21RxG6gRdfOGlbFhCMLuSwx/4I7y8Op65WSrA\nDiFIhIcWC78ZtdzSexwBU2+InJOxY67HuOW7l5cVB53PRLFx28ZJE963jkrwjwr8\nvoJ5k4xEd/nzpnBJ6SZbtdyc5+hNIjYfV0e54SoibVfQJcZxMgq2AOTHfRENmCwC\nRyCwwCoHAgMBAAECggEBALWfyvne9LfEG6dD3hjTAz9/QKwyDhfBPTNY8sRTRnNy\nNojIVCVkYoRJzV7KHubQakAHupi0mqEq6mqVlKXxX2SHGxZg9QQ864f5h4JfWeCR\nOHUVTn3T9KcBc/BSCtfxzYO06lCpmAWrNbeuQU9xHk6I7qJ92GAa3ECXI0lR5EXq\nWn9Vq9SAeCh4tm24JepsfPhJj23JKaPCwzCo0Sbgs2KnAaKbM8ItFZjQYyiuwBNy\n1JbLLsJozknVNd9x6sUJLpniSrbhnZ5DH54VG29EsXDJBJOSNqG00fRmsSefRyXZ\nzrco1zUtB5gKX/x9y2EsyKxaLozRjdUuMMXC+EIcO/kCgYEA68CqKSqJpA9BgA2q\nRrn4CbKqNrwv27iMU07BQ0NLYxY8Tf9Ak2yL2jUjwOUaHkeVo1ryVeJxVXfU4qBs\n/3Z7MgfEiXkxWcC6ptUsJdls3zmPafWE71khvjfDr/ct1NFej7UCgmZcHnScVoZQ\n59alvccCNBkYJtgNrICZb7Bp4O0CgYEAygTsIHFhJotCuVqywERW8WSxoA766EZF\na+vEwnYhGrwvRvC9CNhzAEQ86xB6cwD4WVqB0sMBLbKVICV16tfPluttx5W5QnGF\nrirwFWUa472t/+hWVaTd2Mjz0ArpQlAWZHGjmtBFlGc9VktPD/Vez8afnD4/nPqy\nCLQXKaMF/EMCgYEAuNzFEa63a5xC4mTUxs0BAKnG61C5vnOCJbk1tsbIEJTZCNhF\nDNUq/Rp6RMHhryi23/dq24nLERf8KRFfJxsDE4IfzSTpW9XTBwtVqQBLbOc33ACY\nEw8zdHNJ0Wvj1mOu4MUxiIs3ZPJPvVFpk8IvCRdKVQvwclUss73Lk1ckTykCgYEA\ni0ltjMjflPW7oZTZXhtAXttwZM0vTer1fn1mgjV0ibxqVF0z2N90GyDxZ5lK8/Qd\nR25RyIFPVLSmgS2S6cK2jHXykQO4YglnhDhypC27pn5nc+Q7cn1jwE59XFnJjkEt\nzz9S8DDdaH7uGYt/DZ++KT/nWJDKx29KRRn2RmzyeYUCgYEAlfRxnBQzRkQBk5rA\npBudyFeYl9oKYxIROX8werPltQo9v7ToGpDWhAJ/GKYPs23kDhT3TZzDS7DZbHkt\npct/VGgzg+GAm/U2vuRC1ijQj9XIieFLNcefDC7oW3pTiijeWg6WGUd9Ant6fiug\nLwnZwfVuNTtd9i7a85u4V0iHvVk=\n-----END PRIVATE KEY-----
-      - CSV_OUTPUT_SUFFIX=Enhanced
       - CSV_ENCODING=utf-8-sig
-      - AWS_ACCESS_KEY_ID=AKIA2LXEQOTSNSSLKUYE
-      - AWS_SECRET_ACCESS_KEY=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
-      - AWS_REGION=us-west-2
       - FLASK_ENV=Production
       - FLASK_DEBUG=1
-      - PORT=8080
+      - PORT=8000
     restart: always
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      test: ["CMD", "curl", "-f", "http://10.0.10.163:8000/health"]
       interval: 30s
       timeout: 10s
       retries: 3
