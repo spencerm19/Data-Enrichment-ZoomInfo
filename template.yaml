@@ -1,0 +1,73 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'SAM template for Data Enrichment Lambda function - Production'
+
+Globals:
+  Function:
+    Timeout: 900
+    MemorySize: 2048
+
+Parameters:
+  S3BucketName:
+    Type: String
+    Description: Name of the S3 bucket to monitor
+    Default: data-enrichment-prod-bucket
+
+Resources:
+  # Lambda function
+  DataEnrichmentFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub ${AWS::StackName}-enrich
+      CodeUri: ./
+      Handler: app.lambda_handler
+      Runtime: python3.12
+      Architectures:
+        - x86_64
+      Environment:
+        Variables:
+          LOG_LEVEL: WARNING
+          ZOOMINFO_SECRET_NAME: zoominfo/credentials-prod
+          S3_OUTPUT_PREFIX: enriched
+      Policies:
+        - S3ReadPolicy:
+            BucketName: !Ref S3BucketName
+        - S3WritePolicy:
+            BucketName: !Ref S3BucketName
+        - Statement:
+            - Effect: Allow
+              Action:
+                - secretsmanager:GetSecretValue
+                - secretsmanager:DescribeSecret
+              Resource: !Sub arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:zoominfo/credentials-prod-*
+      Events:
+        S3Trigger:
+          Type: S3
+          Properties:
+            Bucket: !Ref DataBucket
+            Events: s3:ObjectCreated:*
+            Filter:
+              S3Key:
+                Rules:
+                  - Name: suffix
+                    Value: .csv
+
+  # S3 Bucket
+  DataBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub ${AWS::StackName}-data-${AWS::AccountId}
+      LifecycleConfiguration:
+        Rules:
+          - Id: DeleteOldFiles
+            Status: Enabled
+            ExpirationInDays: 30
+
+Outputs:
+  FunctionArn:
+    Description: ARN of the Lambda function
+    Value: !GetAtt DataEnrichmentFunction.Arn
+
+  BucketName:
+    Description: Name of the S3 bucket
+    Value: !Ref DataBucket 

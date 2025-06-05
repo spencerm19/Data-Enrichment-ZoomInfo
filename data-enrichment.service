@@ -1,0 +1,15 @@
+[Unit]
+Description=Data Enrichment Service
+After=network.target
+
+[Service]
+User=spencer
+Group=spencer
+WorkingDirectory=/home/spencer/docker/data-enrichment
+Environment="PATH=/home/spencer/docker/data-enrichment/venv/bin"
+ExecStart=/home/spencer/docker/data-enrichment/venv/bin/uvicorn main:app --host 0.0.0.0 --port 8888
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target 
