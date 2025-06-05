@@ -20,43 +20,63 @@ wheels/
 .installed.cfg
 *.egg
 
-# Environment variables
-.env
-.env.local
-.env.development
-.env.development.local
-.env.test
-.env.test.local
-.env.production
-.env.production.local
-
 # Virtual Environment
 venv/
 ENV/
 env/
+.env
 
-# IDE
+# IDE and Editor Files
 .idea/
 .vscode/
 *.swp
 *.swo
 .vs/
 *.code-workspace
+.project
+.pydevproject
+.settings/
+*.sublime-workspace
+*.sublime-project
 
 # AWS SAM
 .aws-sam/
 samconfig.toml
 
-# Logs
+# Logs and Databases
 *.log
 logs/
+*.sqlite
+*.db
 
-# Project specific
-uploads/
-tests/__pycache__/
+# Local development and testing
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 config.json
+*config.local.json
+*.local.yaml
+test_output/
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
 *.csv
-.DS_Store
+SampleTesting.csv
+
+# Data and Upload directories
+uploads/*
+!uploads/.gitkeep
+data/
+temp/
+*.xlsx
+*.xls
+*.pdf
+*.zip
 
 # Docker
 .docker/
@@ -64,3 +84,17 @@ docker-compose.override.yml
 
 # Service files
 *.service
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Backup files
+*.bak
+*.backup
+*~
