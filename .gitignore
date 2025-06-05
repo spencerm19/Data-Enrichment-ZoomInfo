@@ -19,6 +19,7 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+.env
 
 # Virtual Environment
 venv/
@@ -47,6 +48,7 @@ logs/
 .env.development.local
 .env.test.local
 .env.production.local
+.env
 
 # Project specific
 uploads/
@@ -58,6 +60,7 @@ config.json
 # Docker
 .docker/
 docker-compose.override.yml
+.env
 
 # Service files
 *.service 
